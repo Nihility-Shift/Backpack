@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-using VoidManager.CustomGUI;
+﻿using VoidManager.CustomGUI;
 using VoidManager.Utilities;
 
 namespace Backpack
@@ -12,9 +11,15 @@ namespace Backpack
         {
             GUITools.DrawChangeKeybindButton("Change backpack interact", ref Configs.ToggleBackpackItem);
 
-            if (GUILayout.Button(Configs.Stack.Value ? "Stack (first in - last out)" : "Queue (first in - first out)"))
+            bool temp = Configs.Stack.Value;
+            if (GUITools.DrawCheckbox("Stack (first in - last out)", ref temp) && temp)
             {
-                Configs.Stack.Value = !Configs.Stack.Value;
+                Configs.Stack.Value = true;
+            }
+            temp = !Configs.Stack.Value;
+            if (GUITools.DrawCheckbox("Queue (first in - first out)", ref temp) && temp)
+            {
+                Configs.Stack.Value = false;
             }
         }
     }

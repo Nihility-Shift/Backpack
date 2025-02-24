@@ -1,6 +1,8 @@
 ﻿using BepInEx;
+using CG;
 using CG.Client.Ship.Interactions;
 using CG.Game.Player;
+using CG.Input;
 using CG.Objects;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,7 @@ namespace Backpack
         internal static void ButtonPressed(object o, EventArgs e)
         {
             if (LocalPlayer.Instance == null) return;
+            if (ServiceBase<InputService>.Instance.CursorVisibilityControl.IsCursorShown) return; //If the player is typing
             if (Configs.ToggleBackpackItem.Value == KeyCode.None) return;
 
             if (UnityInput.Current.GetKeyDown(Configs.ToggleBackpackItem.Value))
